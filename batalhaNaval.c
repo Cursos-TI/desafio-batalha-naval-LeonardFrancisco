@@ -60,21 +60,18 @@ void posicionarNavio(int tabuleiro[LINHAS][COLUNAS], int linha, int coluna, char
 
 //Habilidade Cone
 void habilidadeCone(int tabuleiro[LINHAS][COLUNAS], int linha_topo, int coluna_topo){
-    for (int i = 0; i < 3 ; i++){
-        int inicio = coluna_topo - i;
-        int fim = coluna_topo + i;
+    if (linha_topo + 3 > LINHAS || coluna_topo + 2 > COLUNAS || coluna_topo - 2 < 0){ //Verificação de posicionamento
+        printf("POSIÇAO DE CONE INVÁLIDA!\n");
+    }else{
+        for (int i = 0; i < 3 ; i++){
+            int inicio = coluna_topo - i;
+            int fim = coluna_topo + i;
 
-        for (int j = inicio; j <= fim; j++){
-            if (linha_topo + 3 > LINHAS || coluna_topo + 2 > COLUNAS || coluna_topo - 2 < 0){ //Verificação de posicionamento
-                printf("POSIÇAO DE CONE INVÁLIDA!\n");
-                erro = 1;
-                break;
-            }else{
+            for (int j = inicio; j <= fim; j++){
                 tabuleiro[linha_topo + i][j] = (tabuleiro[linha_topo + i][j] == NAVIO) ? 5 : 1;
             }
         }
-    }
-        
+    }  
 }
 
 
@@ -132,7 +129,7 @@ int main() {
     //Aplicando as habilidades no tabuleiro
     habilidadeCone(tabuleiro, 3, 2);
     habilidadeOctaedro(tabuleiro, 1, 3);
-    habilidadeCruz (tabuleiro, 7, 7);
+    habilidadeCruz (tabuleiro, 7, 6);
 
     // Exibindo o tabuleiro com os navios em suas posições e as posíveis posições atingidas pelas habilidades.
     printf("   1 2 3 4 5 6 7 8 9 10\n");
